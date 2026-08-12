@@ -233,6 +233,45 @@ const AddBtn = styled.button`
   }
 `;
 
+const ReviewBadge = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: ${({ theme }) => theme.colors.gold};
+  margin-top: 10px;
+  margin-bottom: 20px;
+  
+  span {
+    color: ${({ theme }) => theme.colors.textMuted};
+    margin-left: 5px;
+    font-size: 0.8rem;
+  }
+`;
+
+const DetailWishlistBtn = styled.button`
+  background: none;
+  border: 1.5px solid ${({ theme }) => theme.colors.sand};
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ $active, theme }) => ($active ? theme.colors.gold : theme.colors.charcoal)};
+  transition: ${({ theme }) => theme.transitions.fast};
+
+  svg {
+    font-size: 20px;
+  }
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.charcoal};
+    transform: scale(1.03);
+  }
+`;
+
 const ProductDesc = styled.p`
   font-size: 0.95rem;
   line-height: 1.7;
@@ -303,7 +342,7 @@ const RelatedGrid = styled.div`
   flex-wrap: wrap;
 `;
 
-function ProductDetail({ onAddToCart }) {
+function ProductDetail({ onAddToCart, wishlist = [], onToggleWishlist }) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -312,6 +351,14 @@ function ProductDetail({ onAddToCart }) {
 
   // Accordion open/close states
   const [openPanel, setOpenPanel] = useState(null);
+
+  const isFavorited = product ? wishlist.some((item) => item.id === product.id) : false;
+
+  const handleWishlistToggle = () => {
+    if (product) {
+      onToggleWishlist(product);
+    }
+  };
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -402,6 +449,14 @@ function ProductDetail({ onAddToCart }) {
           <CategoryLabel>{product.category}</CategoryLabel>
           <Title>{product.title}</Title>
           <Price>${product.price.toFixed(2)}</Price>
+          <ReviewBadge>
+            <Icon icon="ph:star-fill" />
+            <Icon icon="ph:star-fill" />
+            <Icon icon="ph:star-fill" />
+            <Icon icon="ph:star-fill" />
+            <Icon icon="ph:star-fill" />
+            <span>4.9 (3 reviews)</span>
+          </ReviewBadge>
           <ProductDesc>{product.description}</ProductDesc>
 
           <Divider />
@@ -449,6 +504,14 @@ function ProductDetail({ onAddToCart }) {
               <QtyBtn onClick={() => handleQtyChange(1)}>+</QtyBtn>
             </QtyPicker>
             <AddBtn onClick={handleAdd}>Add to Bag</AddBtn>
+            <DetailWishlistBtn 
+              type="button" 
+              $active={isFavorited} 
+              onClick={handleWishlistToggle}
+              aria-label="Add to Favorites"
+            >
+              <Icon icon={isFavorited ? "ph:heart-fill" : "ph:heart"} />
+            </DetailWishlistBtn>
           </PurchaseControls>
 
           {/* Accodion lists */}
@@ -480,6 +543,41 @@ function ProductDetail({ onAddToCart }) {
                 <p style={{ marginTop: '10px' }}>We want you to love your purchase. Unworn and unwashed items can be returned within 14 days of delivery.</p>
               </AccordionContent>
             </AccordionItem>
+
+            <AccordionItem>
+              <AccordionHeader 
+                $isOpen={openPanel === 'reviews'} 
+                onClick={() => toggleAccordion('reviews')}
+              >
+                <span>Customer Reviews (3)</span>
+                <Icon icon="ph:caret-down" />
+              </AccordionHeader>
+              <AccordionContent $isOpen={openPanel === 'reviews'}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', paddingTop: '10px' }}>
+                  <div>
+                    <div style={{ display: 'flex', color: '#DCA842', gap: '2px', fontSize: '0.75rem', marginBottom: '4px' }}>
+                      <Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" />
+                    </div>
+                    <strong style={{ fontSize: '0.85rem', color: '#2C221E' }}>Wonderfully soft cotton!</strong>
+                    <p style={{ fontSize: '0.8rem', color: 'rgba(44, 34, 30, 0.7)', marginTop: '4px' }}>&ldquo;This garment exceeded my expectations. The organic cotton is so soft and holds its shape perfectly after washing.&rdquo; — Emily S.</p>
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', color: '#DCA842', gap: '2px', fontSize: '0.75rem', marginBottom: '4px' }}>
+                      <Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" />
+                    </div>
+                    <strong style={{ fontSize: '0.85rem', color: '#2C221E' }}>Perfect fit and lovely color</strong>
+                    <p style={{ fontSize: '0.8rem', color: 'rgba(44, 34, 30, 0.7)', marginTop: '4px' }}>&ldquo;The color is beautiful and earthy. Snap fasteners make diaper changes very easy.&rdquo; — Clara R.</p>
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', color: '#DCA842', gap: '2px', fontSize: '0.75rem', marginBottom: '4px' }}>
+                      <Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-fill" /><Icon icon="ph:star-light" />
+                    </div>
+                    <strong style={{ fontSize: '0.85rem', color: '#2C221E' }}>Highly recommended!</strong>
+                    <p style={{ fontSize: '0.8rem', color: 'rgba(44, 34, 30, 0.7)', marginTop: '4px' }}>&ldquo;Keeps my baby cozy and looks very stylish. Delivery to Hamilton was super fast.&rdquo; — Liam N.</p>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
           </Accordion>
         </DetailsColumn>
       </ProductGrid>
@@ -493,6 +591,8 @@ function ProductDetail({ onAddToCart }) {
               key={p.id} 
               product={p} 
               onAddToCart={onAddToCart} 
+              wishlist={wishlist}
+              onToggleWishlist={onToggleWishlist}
             />
           ))}
         </RelatedGrid>

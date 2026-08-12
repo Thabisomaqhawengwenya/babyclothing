@@ -13,6 +13,7 @@ import WishlistDrawer from './components/WishlistDrawer.jsx';
 import CheckoutModal from './components/CheckoutModal.jsx';
 import SearchOverlay from './components/SearchOverlay.jsx';
 import CustomCursor from './components/CustomCursor.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 
 // Page imports
 import Home from './pages/Home.jsx';
@@ -150,6 +151,7 @@ function App() {
       <GlobalStyles />
       <CustomCursor />
       <Router>
+        <ScrollToTop />
         <AnnouncementBar />
         <Header 
           cartCount={totalItemsCount} 
