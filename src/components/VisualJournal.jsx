@@ -88,10 +88,10 @@ const JournalImg = styled.img`
 
 function VisualJournal() {
   const photos = [
-    { src: 'assets/hero_baby.png', alt: 'Baby sleeping in organic cotton wrap' },
-    { src: 'assets/category_onesie.png', alt: 'Baby playing in ribbed sage green onesie' },
-    { src: 'assets/banner_socks.png', alt: 'Detail shot of soft cotton knit socks' },
-    { src: 'assets/product_onesie_oatmeal.png', alt: 'Toddler wearing neutral pocket tee' }
+    { src: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Toddler playing in warm sunlit nursery' },
+    { src: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Baby sleeping in swaddled organic cotton bedding' },
+    { src: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Close-up of baby feet wrapped in organic knit blanket' },
+    { src: 'https://images.unsplash.com/photo-1504194104404-4aa3a7c36996?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Baby laughing wearing neutral-toned infant wear' }
   ];
 
   return (
