@@ -229,6 +229,26 @@ const SizeButton = styled.button`
   }
 `;
 
+const BuyBtn = styled.button`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.charcoal};
+  color: ${({ theme }) => theme.colors.white};
+  border: none;
+  padding: 8px;
+  margin-top: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: ${({ theme }) => theme.transitions.fast};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gold};
+  }
+`;
+
 function ProductCard({ product, onAddToCart, wishlist = [], onToggleWishlist }) {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState('12-18m');
@@ -297,6 +317,7 @@ function ProductCard({ product, onAddToCart, wishlist = [], onToggleWishlist }) 
             </SizeButton>
           ))}
         </SizeSelectWrap>
+        <BuyBtn onClick={handleQuickAdd}>Add to Bag</BuyBtn>
       </Meta>
     </Card>
   );
