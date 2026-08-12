@@ -4,6 +4,7 @@ import BrandBanner from '../components/BrandBanner.jsx';
 import Story from '../components/Story.jsx';
 import Categories from '../components/Categories.jsx';
 import Testimonials from '../components/Testimonials.jsx';
+import VisualJournal from '../components/VisualJournal.jsx';
 
 function Home({ onAddToCart, wishlist, onToggleWishlist }) {
   return (
@@ -14,6 +15,7 @@ function Home({ onAddToCart, wishlist, onToggleWishlist }) {
       <Testimonials />
       <Story />
       <Categories />
+      <VisualJournal />
     </>
   );
 }
