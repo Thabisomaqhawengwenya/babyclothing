@@ -88,10 +88,10 @@ const JournalImg = styled.img`
 
 function VisualJournal() {
   const photos = [
-    { src: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Toddler playing in warm sunlit nursery' },
-    { src: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Baby sleeping in swaddled organic cotton bedding' },
-    { src: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Close-up of baby feet wrapped in organic knit blanket' },
-    { src: 'https://images.unsplash.com/photo-1504194104404-4aa3a7c36996?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Baby laughing wearing neutral-toned infant wear' }
+    { src: 'https://images.unsplash.com/photo-1617331140180-e8262094733a?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Baby playing in neutral organic ribbed onesie' },
+    { src: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Minimalist organic garments hanging on a wooden rack' },
+    { src: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Baby feet snuggled under organic waffle knit blanket' },
+    { src: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=600&h=600&q=80', alt: 'Newborn sleeping peacefully in warm cream-colored romper' }
   ];
 
   return (
