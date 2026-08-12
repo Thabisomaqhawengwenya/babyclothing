@@ -206,6 +206,17 @@ const Price = styled.span`
   color: ${({ theme }) => theme.colors.gold};
 `;
 
+const CardStockWarning = styled.span`
+  display: block;
+  font-size: 0.65rem;
+  color: #DCA842;
+  font-weight: 600;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+`;
+
 const SizeSelectWrap = styled.div`
   margin-top: 8px;
   display: flex;
@@ -306,6 +317,9 @@ function ProductCard({ product, onAddToCart, wishlist = [], onToggleWishlist }) 
           <Title>{product.title}</Title>
         </TitleLink>
         <Price>${product.price.toFixed(2)}</Price>
+        {(product.id === 'ribbed-beanie' || product.id === 'snap-bib' || product.id === 'honey-set') && (
+          <CardStockWarning>Only 2 left</CardStockWarning>
+        )}
         <SizeSelectWrap>
           {['6-12m', '12-18m', '18-24m'].map((size) => (
             <SizeButton

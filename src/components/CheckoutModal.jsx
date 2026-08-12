@@ -193,6 +193,51 @@ const SubmitBtn = styled.button`
   }
 `;
 
+const GiftSection = styled.div`
+  background-color: ${({ theme }) => theme.colors.sandLight};
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 25px;
+  border: 1.5px solid ${({ theme }) => theme.colors.sand};
+`;
+
+const GiftCheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.charcoal};
+  cursor: pointer;
+  
+  input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: ${({ theme }) => theme.colors.gold};
+  }
+`;
+
+const GiftMessageArea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid ${({ theme }) => theme.colors.sand};
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.sans};
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.charcoal};
+  margin-top: 12px;
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: ${({ theme }) => theme.transitions.fast};
+
+  &:focus {
+    border-color: ${({ theme }) => theme.colors.gold};
+  }
+`;
+
 const LoadingOverlay = styled.div`
   position: absolute;
   top: 0;
@@ -298,6 +343,10 @@ function CheckoutModal({ isOpen, onClose, cart, total, onClearCart }) {
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderResult, setOrderResult] = useState(null);
+  const [addGiftWrap, setAddGiftWrap] = useState(false);
+  const [giftMessage, setGiftMessage] = useState('');
+
+  const finalTotal = addGiftWrap ? total + 5 : total;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -334,7 +383,9 @@ function CheckoutModal({ isOpen, onClose, cart, total, onClearCart }) {
             city: formData.city,
             country: formData.country
           },
-          total: total
+          total: finalTotal,
+          giftWrap: addGiftWrap,
+          giftMessage: addGiftWrap ? giftMessage : ''
         })
       })
         .then((res) => {
@@ -393,7 +444,7 @@ function CheckoutModal({ isOpen, onClose, cart, total, onClearCart }) {
           </SuccessOverlay>
         )}
 
-        <Content onSubmit={handleFormSubmit}>
+        <Content id="checkout-form" onSubmit={handleFormSubmit}>
           <SectionTitle>1. Shipping Information</SectionTitle>
           <FormGroup>
             <Label>Full Name</Label>
@@ -497,27 +548,52 @@ function CheckoutModal({ isOpen, onClose, cart, total, onClearCart }) {
             </FormGroup>
           </Row>
 
-          <SectionTitle style={{ marginTop: '20px' }}>3. Summary</SectionTitle>
+          <GiftSection>
+            <GiftCheckboxLabel>
+              <input 
+                type="checkbox" 
+                checked={addGiftWrap} 
+                onChange={(e) => setAddGiftWrap(e.target.checked)} 
+              />
+              <span>Add signature organic linen wrap & custom card (+$5.00)</span>
+            </GiftCheckboxLabel>
+            {addGiftWrap && (
+              <GiftMessageArea
+                placeholder="Enter your gift message for the recipient..."
+                value={giftMessage}
+                onChange={(e) => setGiftMessage(e.target.value)}
+                maxLength="300"
+              />
+            )}
+          </GiftSection>
+
+          <SectionTitle style={{ marginTop: '25px' }}>3. Summary</SectionTitle>
           <SummaryBox>
             <SummaryRow>
               <span>Subtotal ({cart.reduce((acc, item) => acc + item.quantity, 0)} items)</span>
               <span>${total.toFixed(2)}</span>
             </SummaryRow>
+            {addGiftWrap && (
+              <SummaryRow>
+                <span>Gift wrapping & card</span>
+                <span>$5.00</span>
+              </SummaryRow>
+            )}
             <SummaryRow>
               <span>Shipping (Bermuda local courier)</span>
               <span>FREE</span>
             </SummaryRow>
             <SummaryRow>
               <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+              <span>${finalTotal.toFixed(2)}</span>
             </SummaryRow>
           </SummaryBox>
         </Content>
 
         <Footer>
           <CancelBtn type="button" onClick={onClose}>Cancel</CancelBtn>
-          <SubmitBtn type="submit" disabled={cart.length === 0}>
-            Pay ${(total).toFixed(2)}
+          <SubmitBtn type="submit" form="checkout-form" disabled={cart.length === 0}>
+            Pay ${finalTotal.toFixed(2)}
           </SubmitBtn>
         </Footer>
       </Modal>

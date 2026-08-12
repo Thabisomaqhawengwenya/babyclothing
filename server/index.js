@@ -199,7 +199,7 @@ app.get('/api/products/:id', (req, res) => {
 });
 
 app.post('/api/orders', (req, res) => {
-  const { items, customer, total } = req.body;
+  const { items, customer, total, giftWrap, giftMessage } = req.body;
   if (!items || !items.length) {
     return res.status(400).json({ error: 'Order must contain items' });
   }
@@ -211,6 +211,8 @@ app.post('/api/orders', (req, res) => {
     items,
     customer: customer || { name: 'Anonymous customer' },
     total: total || 0,
+    giftWrap: giftWrap || false,
+    giftMessage: giftMessage || '',
     status: 'Pending'
   };
 

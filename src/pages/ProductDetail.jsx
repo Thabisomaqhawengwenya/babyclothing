@@ -272,6 +272,103 @@ const DetailWishlistBtn = styled.button`
   }
 `;
 
+const StockWarning = styled.div`
+  font-size: 0.8rem;
+  color: #DCA842;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  svg {
+    font-size: 0.95rem;
+  }
+`;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 34, 30, 0.4);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  pointer-events: ${({ $isOpen }) => ($isOpen ? 'auto' : 'none')};
+  transition: opacity 0.3s ease;
+`;
+
+const SizeModal = styled.div`
+  background-color: ${({ theme }) => theme.colors.bgCream};
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 4px;
+  box-shadow: 0 20px 50px rgba(44, 34, 30, 0.15);
+  position: relative;
+  transform: translateY(${({ $isOpen }) => ($isOpen ? '0' : '20px')});
+  transition: transform 0.3s ease;
+`;
+
+const SizeModalClose = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.charcoal};
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SizeTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  
+  th, td {
+    padding: 12px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
+    text-align: left;
+  }
+  
+  th {
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.charcoal};
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  
+  td {
+    color: rgba(44, 34, 30, 0.8);
+  }
+`;
+
+const SizeGuideLink = styled.button`
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  color: ${({ theme }) => theme.colors.textMuted};
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 500;
+  
+  &:hover {
+    color: ${({ theme }) => theme.colors.charcoal};
+  }
+`;
+
 const ProductDesc = styled.p`
   font-size: 0.95rem;
   line-height: 1.7;
@@ -351,6 +448,7 @@ function ProductDetail({ onAddToCart, wishlist = [], onToggleWishlist }) {
 
   // Accordion open/close states
   const [openPanel, setOpenPanel] = useState(null);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   const isFavorited = product ? wishlist.some((item) => item.id === product.id) : false;
 
@@ -461,6 +559,14 @@ function ProductDetail({ onAddToCart, wishlist = [], onToggleWishlist }) {
 
           <Divider />
 
+          {/* Stock urgency */}
+          {(product.id === 'ribbed-beanie' || product.id === 'snap-bib' || product.id === 'honey-set') && (
+            <StockWarning>
+              <Icon icon="ph:warning-circle" />
+              <span>Only 2 left in stock - order soon!</span>
+            </StockWarning>
+          )}
+
           {/* Color swatches */}
           {selectedColor && (
             <>
@@ -481,9 +587,12 @@ function ProductDetail({ onAddToCart, wishlist = [], onToggleWishlist }) {
           )}
 
           {/* Sizes picker */}
-          <SelectionLabel>
-            Size: <span>{selectedSize}</span>
-          </SelectionLabel>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <SelectionLabel style={{ marginBottom: 0 }}>
+              Size: <span>{selectedSize}</span>
+            </SelectionLabel>
+            <SizeGuideLink onClick={() => setIsSizeGuideOpen(true)}>Size Guide</SizeGuideLink>
+          </div>
           <SizeSelectWrap>
             {['6-12m', '12-18m', '18-24m'].map((size) => (
               <SizeButton
@@ -597,6 +706,46 @@ function ProductDetail({ onAddToCart, wishlist = [], onToggleWishlist }) {
           ))}
         </RelatedGrid>
       </RelatedSection>
+
+      <ModalOverlay $isOpen={isSizeGuideOpen} onClick={() => setIsSizeGuideOpen(false)}>
+        <SizeModal $isOpen={isSizeGuideOpen} onClick={(e) => e.stopPropagation()}>
+          <SizeModalClose onClick={() => setIsSizeGuideOpen(false)} aria-label="Close Size Guide">
+            <Icon icon="ph:x" />
+          </SizeModalClose>
+          <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', fontWeight: 400, color: '#2C221E' }}>Size Chart</h3>
+          <p style={{ fontSize: '0.8rem', color: 'rgba(44, 34, 30, 0.7)', marginTop: '5px' }}>Our premium organic cotton has natural stretch and fits true to size. If between sizes, we recommend sizing up.</p>
+          <SizeTable>
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Age</th>
+                <th>Weight</th>
+                <th>Height</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>6-12m</td>
+                <td>6 - 12 Months</td>
+                <td>17 - 22 lbs</td>
+                <td>27 - 29 in</td>
+              </tr>
+              <tr>
+                <td>12-18m</td>
+                <td>12 - 18 Months</td>
+                <td>22 - 27 lbs</td>
+                <td>29 - 31 in</td>
+              </tr>
+              <tr>
+                <td>18-24m</td>
+                <td>18 - 24 Months</td>
+                <td>27 - 30 lbs</td>
+                <td>31 - 33 in</td>
+              </tr>
+            </tbody>
+          </SizeTable>
+        </SizeModal>
+      </ModalOverlay>
     </PageContainer>
   );
 }
