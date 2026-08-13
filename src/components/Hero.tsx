@@ -115,7 +115,7 @@ function Hero() {
   return (
     <HeroSection id="home">
       <BgContainer>
-        <BgImg src="assets/hero_baby.png" alt="Baby resting on fluffy fur fabric wearing neutral knitwear" />
+        <BgImg src="/assets/hero_baby.png" alt="Baby resting on fluffy fur fabric wearing neutral knitwear" />
       </BgContainer>
       <Overlay />
       <HeroContent>

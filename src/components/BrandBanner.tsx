@@ -71,7 +71,7 @@ const Text = styled.p`
 function BrandBanner() {
   return (
     <BannerSection>
-      <BannerBg src="assets/banner_socks.png" alt="Infant feet wearing white knit textured socks" />
+      <BannerBg src="/assets/banner_socks.png" alt="Infant feet wearing white knit textured socks" />
       <Overlay />
       <Content>
         <Title>High Quality Clothing</Title>

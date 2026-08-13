@@ -46,7 +46,7 @@ function App() {
       size: '6-12m',
       price: 18.00,
       quantity: 1,
-      image: 'assets/product_oatmeal.png'
+      image: '/assets/product_oatmeal.png'
     }
   ]);
   const [wishlist, setWishlist] = useState([]);
