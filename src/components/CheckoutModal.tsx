@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Icon } from '@iconify/react';
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ $isOpen?: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -19,7 +19,7 @@ const Overlay = styled.div`
   padding: 20px;
 `;
 
-const Modal = styled.div`
+const Modal = styled.div<{ $isOpen?: boolean }>`
   background-color: ${({ theme }) => theme.colors.bgCream};
   width: 100%;
   max-width: 550px;
@@ -516,7 +516,7 @@ function CheckoutModal({ isOpen, onClose, cart, total, onClearCart }) {
               value={formData.card} 
               onChange={handleInputChange} 
               placeholder="4111 •••• •••• ••••" 
-              maxLength="19"
+              maxLength={19}
               required 
             />
           </FormGroup>
@@ -530,7 +530,7 @@ function CheckoutModal({ isOpen, onClose, cart, total, onClearCart }) {
                 value={formData.expiry} 
                 onChange={handleInputChange} 
                 placeholder="MM/YY" 
-                maxLength="5"
+                maxLength={5}
                 required 
               />
             </FormGroup>
@@ -542,7 +542,7 @@ function CheckoutModal({ isOpen, onClose, cart, total, onClearCart }) {
                 value={formData.cvv} 
                 onChange={handleInputChange} 
                 placeholder="•••" 
-                maxLength="3"
+                maxLength={3}
                 required 
               />
             </FormGroup>
@@ -562,7 +562,7 @@ function CheckoutModal({ isOpen, onClose, cart, total, onClearCart }) {
                 placeholder="Enter your gift message for the recipient..."
                 value={giftMessage}
                 onChange={(e) => setGiftMessage(e.target.value)}
-                maxLength="300"
+                maxLength={300}
               />
             )}
           </GiftSection>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ $isOpen?: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -14,7 +14,7 @@ const Overlay = styled.div`
   transition: opacity 0.4s ease;
 `;
 
-const Drawer = styled.div`
+const Drawer = styled.div<{ $isOpen?: boolean }>`
   position: fixed;
   top: 0;
   right: ${({ $isOpen }) => ($isOpen ? '0' : '-450px')};

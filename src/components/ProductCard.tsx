@@ -116,7 +116,7 @@ const QuickAddBtn = styled.button`
   }
 `;
 
-const WishlistBtn = styled.button`
+const WishlistBtn = styled.button<{ $active?: boolean }>`
   position: absolute;
   top: 15px;
   right: 15px;
@@ -155,7 +155,7 @@ const SwatchContainer = styled.div`
   margin-bottom: 12px;
 `;
 
-const Swatch = styled.span`
+const Swatch = styled.span<{ $colorVal?: string; $active?: boolean }>`
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -224,7 +224,7 @@ const SizeSelectWrap = styled.div`
   gap: 5px;
 `;
 
-const SizeButton = styled.button`
+const SizeButton = styled.button<{ $active?: boolean }>`
   background: none;
   border: 1px solid ${({ $active, theme }) => ($active ? theme.colors.charcoal : theme.colors.sand)};
   padding: 2px 6px;

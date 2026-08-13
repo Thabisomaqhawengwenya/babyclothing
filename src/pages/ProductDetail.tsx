@@ -126,7 +126,7 @@ const SwatchContainer = styled.div`
   margin-bottom: 25px;
 `;
 
-const Swatch = styled.span`
+const Swatch = styled.span<{ $colorVal?: string; $active?: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -155,7 +155,7 @@ const SizeSelectWrap = styled.div`
   margin-bottom: 25px;
 `;
 
-const SizeButton = styled.button`
+const SizeButton = styled.button<{ $active?: boolean }>`
   background: none;
   border: 1.5px solid ${({ $active, theme }) => ($active ? theme.colors.charcoal : theme.colors.sand)};
   padding: 10px 20px;
@@ -249,7 +249,7 @@ const ReviewBadge = styled.div`
   }
 `;
 
-const DetailWishlistBtn = styled.button`
+const DetailWishlistBtn = styled.button<{ $active?: boolean }>`
   background: none;
   border: 1.5px solid ${({ theme }) => theme.colors.sand};
   cursor: pointer;
@@ -287,7 +287,7 @@ const StockWarning = styled.div`
   }
 `;
 
-const ModalOverlay = styled.div`
+const ModalOverlay = styled.div<{ $isOpen?: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -303,7 +303,7 @@ const ModalOverlay = styled.div`
   transition: opacity 0.3s ease;
 `;
 
-const SizeModal = styled.div`
+const SizeModal = styled.div<{ $isOpen?: boolean }>`
   background-color: ${({ theme }) => theme.colors.bgCream};
   padding: 40px;
   width: 90%;
@@ -385,7 +385,7 @@ const AccordionItem = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
 
-const AccordionHeader = styled.button`
+const AccordionHeader = styled.button<{ $isOpen?: boolean }>`
   width: 100%;
   background: none;
   border: none;
@@ -409,7 +409,7 @@ const AccordionHeader = styled.button`
   }
 `;
 
-const AccordionContent = styled.div`
+const AccordionContent = styled.div<{ $isOpen?: boolean }>`
   max-height: ${({ $isOpen }) => ($isOpen ? '200px' : '0')};
   overflow: hidden;
   transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1);

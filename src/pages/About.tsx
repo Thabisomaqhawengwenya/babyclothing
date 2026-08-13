@@ -95,7 +95,7 @@ const TimelineContainer = styled.div`
   }
 `;
 
-const TimelineItem = styled.div`
+const TimelineItem = styled.div<{ $align?: string }>`
   position: relative;
   width: 50%;
   margin-bottom: 50px;
@@ -114,7 +114,7 @@ const TimelineItem = styled.div`
   }
 `;
 
-const TimelineDot = styled.div`
+const TimelineDot = styled.div<{ $align?: string }>`
   width: 14px;
   height: 14px;
   border-radius: 50%;

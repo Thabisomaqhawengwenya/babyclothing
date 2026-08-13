@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { Link, useLocation } from 'react-router-dom';
 
-const HeaderContainer = styled.header`
+const HeaderContainer = styled.header<{ $scrolled?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +47,7 @@ const LogoSvg = styled.svg`
   height: 100%;
 
   text {
-    font-family: ${({ theme }) => theme.colors.sans};
+    font-family: ${({ theme }) => theme.fonts.sans};
     font-size: 8.5px;
     font-weight: 600;
     letter-spacing: 1.2px;
@@ -168,7 +168,7 @@ const HamburgerBtn = styled.button`
 `;
 
 /* Mobile Navigation Panel overlay */
-const MobileMenu = styled.div`
+const MobileMenu = styled.div<{ $isOpen?: boolean }>`
   display: none;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {

@@ -16,7 +16,7 @@ const CursorWrapper = styled.div`
   }
 `;
 
-const Dot = styled.div.attrs(({ $x, $y }) => ({
+const Dot = styled.div.attrs<{ $x: number; $y: number }>(({ $x, $y }) => ({
   style: {
     transform: `translate3d(${$x - 3}px, ${$y - 3}px, 0)`
   }
@@ -30,7 +30,7 @@ const Dot = styled.div.attrs(({ $x, $y }) => ({
   will-change: transform;
 `;
 
-const Ring = styled.div.attrs(({ $x, $y, $size }) => ({
+const Ring = styled.div.attrs<{ $x: number; $y: number; $size: number }>(({ $x, $y, $size }) => ({
   style: {
     width: `${$size}px`,
     height: `${$size}px`,
@@ -48,7 +48,7 @@ const Ring = styled.div.attrs(({ $x, $y, $size }) => ({
   overflow: hidden;
 `;
 
-const Label = styled.span`
+const Label = styled.span<{ $show?: boolean }>`
   color: ${({ theme }) => theme.colors.charcoal};
   font-family: ${({ theme }) => theme.fonts.sans};
   font-size: 0.55rem;
@@ -63,7 +63,7 @@ function CustomCursor() {
   const [mouse, setMouse] = useState({ x: -100, y: -100 });
   const [trail, setTrail] = useState({ x: -100, y: -100 });
   const [type, setType] = useState('default'); // 'default', 'view', 'drag', 'link'
-  const requestRef = useRef();
+  const requestRef = useRef<number>();
 
   // Trail physics animation
   useEffect(() => {

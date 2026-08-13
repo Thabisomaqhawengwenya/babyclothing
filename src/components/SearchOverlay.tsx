@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ $isOpen?: boolean }>`
   position: fixed;
   top: 0;
   left: 0;

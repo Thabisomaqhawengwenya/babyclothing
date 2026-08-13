@@ -153,7 +153,7 @@ const AccordionItem = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
 
-const AccordionHeader = styled.button`
+const AccordionHeader = styled.button<{ $isOpen?: boolean }>`
   width: 100%;
   background: none;
   border: none;
@@ -177,7 +177,7 @@ const AccordionHeader = styled.button`
   }
 `;
 
-const AccordionContent = styled.div`
+const AccordionContent = styled.div<{ $isOpen?: boolean }>`
   max-height: ${({ $isOpen }) => ($isOpen ? '200px' : '0')};
   overflow: hidden;
   transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1);

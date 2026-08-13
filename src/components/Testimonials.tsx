@@ -32,7 +32,7 @@ const QuoteIcon = styled.div`
   margin-bottom: 25px;
 `;
 
-const SlideContainer = styled.div`
+const SlideContainer = styled.div<{ $active?: boolean }>`
   transition: opacity 0.5s ease;
   opacity: ${({ $active }) => ($active ? 1 : 0)};
   display: ${({ $active }) => ($active ? 'block' : 'none')};
@@ -66,7 +66,7 @@ const DotContainer = styled.div`
   margin-top: 35px;
 `;
 
-const Dot = styled.button`
+const Dot = styled.button<{ $active?: boolean }>`
   width: 8px;
   height: 8px;
   border-radius: 50%;
