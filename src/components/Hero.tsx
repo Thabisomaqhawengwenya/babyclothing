@@ -41,7 +41,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(249, 244, 235, 0.1) 0%, rgba(44, 34, 30, 0.25) 100%);
+  background: linear-gradient(180deg, rgba(44, 34, 30, 0.3) 0%, rgba(44, 34, 30, 0.55) 100%);
   z-index: 2;
 `;
 
