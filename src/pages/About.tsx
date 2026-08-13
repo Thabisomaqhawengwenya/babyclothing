@@ -253,7 +253,7 @@ function About() {
       </HeaderSection>
 
       <BannerWrap>
-        <BannerImg src="/assets/hero_baby.png" alt="Baby sleeping in organic wrap" />
+        <BannerImg src="/images/hero_baby.png" alt="Baby sleeping in organic wrap" />
       </BannerWrap>
 
       <IntroSection>

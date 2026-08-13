@@ -112,7 +112,7 @@ function Categories() {
 
       {/* Right image card for Onesies */}
       <CategoryBlock href="#shop">
-        <CategoryBg src="/assets/category_onesie.png" alt="Onesies Category" />
+        <CategoryBg src="/images/category_onesie.png" alt="Onesies Category" />
         <CategoryOverlay />
         <CategoryTitle>Onesies</CategoryTitle>
       </CategoryBlock>
