@@ -161,10 +161,12 @@ const ProductsGrid = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    & > div:nth-child(2n) {
+    & > div:nth-child(2n),
+    & > div:nth-child(3n + 2),
+    & > div:nth-child(3n + 3) {
       margin-top: 0;
     }
-    gap: 30px;
+    gap: 20px;
   }
 `;
 

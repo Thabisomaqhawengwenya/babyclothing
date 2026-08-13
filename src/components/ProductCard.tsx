@@ -5,18 +5,30 @@ import { Icon } from '@iconify/react';
 
 const Card = styled.div`
   flex: 0 0 calc(33.333% - 20px);
-  min-width: 300px;
+  min-width: 280px;
   display: flex;
   flex-direction: column;
-  background: transparent;
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid ${({ theme }) => theme.colors.borderLight};
   transition: ${({ theme }) => theme.transitions.smooth};
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(44, 34, 30, 0.06);
+    border-color: ${({ theme }) => theme.colors.gold};
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     flex: 0 0 calc(50% - 15px);
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    flex: 0 0 100%;
+    flex: 0 0 calc(50% - 10px);
+    min-width: unset;
+    padding: 12px;
+    border-radius: 4px;
   }
 `;
 
@@ -70,6 +82,10 @@ const ImageWrap = styled.div`
   &:hover::before {
     opacity: 1;
     animation: ${liquidPulse} 4s infinite ease-in-out;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    margin-bottom: 12px;
   }
 `;
 
@@ -198,6 +214,10 @@ const Title = styled.h3`
   margin-bottom: 6px;
   letter-spacing: 0.01em;
   transition: ${({ theme }) => theme.transitions.fast};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Price = styled.span`
@@ -331,7 +351,6 @@ function ProductCard({ product, onAddToCart, wishlist = [], onToggleWishlist }) 
             </SizeButton>
           ))}
         </SizeSelectWrap>
-        <BuyBtn onClick={handleQuickAdd}>Add to Bag</BuyBtn>
       </Meta>
     </Card>
   );
